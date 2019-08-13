@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/buttonCutPaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Cut Paper" />
+
+    <Button
+        android:id="@+id/buttonFormFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonCutPaper"
+        android:layout_marginTop="5dp"
+        android:text="Form Feed" />
+
+    <Button
+        android:id="@+id/buttonTransactionPrint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonFormFeed"
+        android:layout_marginTop="5dp"
+        android:text="Transaction Print" />
+
+    <Button
+        android:id="@+id/buttonReceiptSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonTransactionPrint"
+        android:layout_marginTop="5dp"
+        android:text="Receipt Sample" />
+
+    <Button
+        android:id="@+id/buttonFarsiSample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonReceiptSample"
+        android:layout_marginTop="5dp"
+        android:text="Farsi Print" />
+
+</RelativeLayout>
