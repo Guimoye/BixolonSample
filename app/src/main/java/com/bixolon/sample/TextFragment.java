@@ -27,7 +27,7 @@ public class TextFragment extends Fragment implements OnClickListener{
     private CheckBox checkUnderline = null;
     private CheckBox checkReverse = null;
 
-    private TextView deviceMessagesTextView;
+    private static TextView deviceMessagesTextView;
 
     private int spinnerAlignment = 0;
     private int spinnerFont = 0;
@@ -150,18 +150,21 @@ public class TextFragment extends Fragment implements OnClickListener{
                     attribute |= MainActivity.getPrinterInstance().ATTRIBUTE_REVERSE;
                 }
 
-                MainActivity.getPrinterInstance().printText(strData, alignment, attribute, (spinnerSize + 1));
+                Log.e("dataaa",MainActivity.getPrinterInstance().printText(strData, alignment, attribute, (spinnerSize + 1))+"");
 
                 break;
         }
     }
 
+    //clase que cambia msj
     public void setDeviceLog(String data)
     {
         mHandler.obtainMessage(0, 0, 0, data).sendToTarget();
     }
 
-    public final Handler mHandler = new Handler(new Handler.Callback()
+
+    //hilo que espera escuchar msj
+    public static final Handler mHandler = new Handler(new Handler.Callback()
     {
         @SuppressWarnings("unchecked")
         @Override
