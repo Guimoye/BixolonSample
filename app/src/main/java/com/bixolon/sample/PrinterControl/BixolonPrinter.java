@@ -1205,6 +1205,7 @@ public class BixolonPrinter implements ErrorListener, OutputCompleteListener, St
             {
                 ((MsrFragment) fm).setDeviceLog("outputComplete : " + outputCompleteEvent.getOutputID());
             }
+           
         }
     }
 

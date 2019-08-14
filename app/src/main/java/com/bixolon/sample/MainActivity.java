@@ -95,10 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 bxlPrinter.printerClose();
                 startConnectionActivity();
                 break;
-            case R.id.action_close:
-                bxlPrinter.printerClose();
-                startConnectionActivity();
-                break;
         }
 
         return true;

@@ -11,18 +11,8 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
 {
     private Context mContext;
     SparseArray<Fragment> registeredFragments = new SparseArray<>();
-
     private TextFragment mTextFragment = null;
-    private ImageFragment mImageFragment = null;
-    private BarcodeFragment mBarcodeFragment = null;
-    private PageModeFragment mPageModeFragment = null;
-    private DirectIOFragment mDirectIOFragment = null;
-    private MsrFragment mMsrFragment = null;
-    private ScrFragment mScrFragment = null;
-    private CashDrawerFragment mCashDrawerFragment = null;
-    private EtcFragment mEtcFragment = null;
-
-    private int[] mTabTitle = {R.string.Text, R.string.PDF_Image, R.string.Barcode, R.string.PageMode, R.string.DirectIO, R.string.MSR, R.string.SCR, R.string.CashDrawer, R.string.ETC};
+    private int[] mTabTitle = {R.string.Text};
 
     public TabPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -54,46 +44,6 @@ public class TabPagerAdapter extends FragmentStatePagerAdapter
                     mTextFragment = mTextFragment.newInstance();
                 }
                 return mTextFragment;
-            case 1:
-                if(mImageFragment == null) {
-                    mImageFragment = mImageFragment.newInstance();
-                }
-                return mImageFragment;
-            case 2:
-                if(mBarcodeFragment == null) {
-                    mBarcodeFragment = mBarcodeFragment.newInstance();
-                }
-                return mBarcodeFragment;
-            case 3:
-                if(mPageModeFragment == null) {
-                    mPageModeFragment = mPageModeFragment.newInstance();
-                }
-                return mPageModeFragment;
-            case 4:
-                if(mDirectIOFragment == null) {
-                    mDirectIOFragment = mDirectIOFragment.newInstance();
-                }
-                return mDirectIOFragment;
-            case 5:
-                if(mMsrFragment == null) {
-                    mMsrFragment = mMsrFragment.newInstance();
-                }
-                return mMsrFragment;
-            case 6:
-                if(mScrFragment == null) {
-                    mScrFragment = mScrFragment.newInstance();
-                }
-                return mScrFragment;
-            case 7:
-                if(mCashDrawerFragment == null) {
-                    mCashDrawerFragment = mCashDrawerFragment.newInstance();
-                }
-                return mCashDrawerFragment;
-            case 8:
-                if(mEtcFragment == null) {
-                    mEtcFragment = mEtcFragment.newInstance();
-                }
-                return mEtcFragment;
             default:
                 return null;
         }

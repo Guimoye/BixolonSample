@@ -1,11 +1,11 @@
 package com.bixolon.sample;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Layout;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,10 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class TextFragment extends Fragment implements OnClickListener{
 
@@ -169,6 +167,10 @@ public class TextFragment extends Fragment implements OnClickListener{
         @Override
         public boolean handleMessage(Message msg)
         {
+            Log.e("mensajess1",(String)msg.obj +"");
+            Log.e("mensajess2",msg.replyTo +"");
+            Log.e("mensajess3",msg.sendingUid +"");
+
             switch (msg.what)
             {
                 case 0:

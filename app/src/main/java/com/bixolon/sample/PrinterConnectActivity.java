@@ -4,7 +4,6 @@ import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -26,14 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bxl.config.editor.BXLConfigLoader;
-import com.bxl.config.util.BXLBluetooth;
-import com.bxl.config.util.BXLBluetoothLE;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
-
-import jpos.JposException;
 
 public class PrinterConnectActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, AdapterView.OnItemClickListener, View.OnTouchListener, View.OnClickListener {
     private final int REQUEST_PERMISSION = 0;
@@ -48,13 +40,10 @@ public class PrinterConnectActivity extends AppCompatActivity implements RadioGr
     private String address = "";
 
     private LinearLayout layoutModel;
-    private LinearLayout layoutIPAddress;
 
     private RadioGroup radioGroupPortType;
     private TextView textViewBluetooth;
     private ListView listView;
-    private EditText editTextIPAddress;
-    private CheckBox checkBoxAsyncMode;
 
     private Button btnPrinterOpen;
 
@@ -67,18 +56,10 @@ public class PrinterConnectActivity extends AppCompatActivity implements RadioGr
         setContentView(R.layout.activity_printer_connect);
 
         layoutModel = findViewById(R.id.LinearLayout2);
-        layoutIPAddress = findViewById(R.id.LinearLayout3);
         layoutModel.setVisibility(View.GONE);
-        layoutIPAddress.setVisibility(View.GONE);
-
         radioGroupPortType = findViewById(R.id.radioGroupPortType);
         radioGroupPortType.setOnCheckedChangeListener(this);
-
         textViewBluetooth = findViewById(R.id.textViewBluetoothList);
-        editTextIPAddress = findViewById(R.id.editTextIPAddr);
-        editTextIPAddress.setText("192.168.0.1");
-
-        checkBoxAsyncMode = findViewById(R.id.checkBoxAsyncMode);
 
         btnPrinterOpen = findViewById(R.id.btnPrinterOpen);
         btnPrinterOpen.setOnClickListener(this);
@@ -142,66 +123,6 @@ public class PrinterConnectActivity extends AppCompatActivity implements RadioGr
         }
     }
 
-    private void setBleDevices()
-    {
-        mHandler.obtainMessage(0).sendToTarget();
-        BXLBluetoothLE.setBLEDeviceSearchOption(5, 1);
-        new searchBLEPrinterTask().execute();
-    }
-
-    private class searchBLEPrinterTask extends AsyncTask<Integer, Integer, Set<BluetoothDevice>>
-    {
-        private String message;
-
-        @Override
-        protected void onPreExecute()
-        {
-        }
-
-        @Override
-        protected void onPostExecute(Set<BluetoothDevice> bluetoothDeviceSet)
-        {
-            bondedDevices.clear();
-
-            if(bluetoothDeviceSet.size() > 0)
-            {
-                for(BluetoothDevice device:bluetoothDeviceSet)
-                {
-                    bondedDevices.add(device.getName() + DEVICE_ADDRESS_START + device.getAddress() + DEVICE_ADDRESS_END);
-                }
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(), "Can't found BLE devices. ", Toast.LENGTH_SHORT).show();
-            }
-
-            if(arrayAdapter != null)
-            {
-                arrayAdapter.notifyDataSetChanged();
-            }
-
-            if(message != null)
-            {
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-            }
-
-            mHandler.obtainMessage(1).sendToTarget();
-        }
-
-        @Override
-        protected Set<BluetoothDevice> doInBackground(Integer... params)
-        {
-            try
-            {
-                return BXLBluetoothLE.getBLEPrinters(PrinterConnectActivity.this, BXLBluetoothLE.SEARCH_BLE_ALWAYS);
-            }
-            catch(NumberFormatException | JposException e)
-            {
-                message = e.getMessage();
-                return new HashSet<>();
-            }
-        }
-    }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -214,36 +135,10 @@ public class PrinterConnectActivity extends AppCompatActivity implements RadioGr
                 listView.setVisibility(View.VISIBLE);
 
                 layoutModel.setVisibility(View.GONE);
-                layoutIPAddress.setVisibility(View.GONE);
 
                 setPairedDevices();
                 break;
-            case R.id.radioBLE:
-                portType = BXLConfigLoader.DEVICE_BUS_BLUETOOTH_LE;
-                textViewBluetooth.setVisibility(View.VISIBLE);
-                listView.setVisibility(View.VISIBLE);
 
-                layoutModel.setVisibility(View.GONE);
-                layoutIPAddress.setVisibility(View.GONE);
-
-                setBleDevices();
-                break;
-            case R.id.radioWifi:
-                portType = BXLConfigLoader.DEVICE_BUS_WIFI;
-                layoutModel.setVisibility(View.VISIBLE);
-                layoutIPAddress.setVisibility(View.VISIBLE);
-
-                textViewBluetooth.setVisibility(View.GONE);
-                listView.setVisibility(View.GONE);
-                break;
-            case R.id.radioUSB:
-                portType = BXLConfigLoader.DEVICE_BUS_USB;
-                layoutModel.setVisibility(View.VISIBLE);
-
-                layoutIPAddress.setVisibility(View.GONE);
-                textViewBluetooth.setVisibility(View.GONE);
-                listView.setVisibility(View.GONE);
-                break;
         }
     }
 
@@ -272,13 +167,8 @@ public class PrinterConnectActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void run()
                     {
-                        // TODO Auto-generated method stub
-                        if(portType == BXLConfigLoader.DEVICE_BUS_WIFI)
-                        {
-                            address = editTextIPAddress.getText().toString();
-                        }
 
-                        if(MainActivity.getPrinterInstance().printerOpen(portType, logicalName, address, checkBoxAsyncMode.isChecked()))
+                        if(MainActivity.getPrinterInstance().printerOpen(portType, logicalName, address, false))
                         {
                             finish();
                         }

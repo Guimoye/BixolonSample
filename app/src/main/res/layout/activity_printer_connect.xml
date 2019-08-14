@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="Bluetooth" />
-
+<!--
                 <RadioButton
                     android:id="@+id/radioWifi"
                     android:layout_width="wrap_content"
@@ -55,6 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BluetoothLowEnergy" />
+                -->
             </RadioGroup>
 
             <TextView
@@ -92,39 +93,40 @@
                     android:layout_gravity="center">
                 </Spinner>
             </LinearLayout>
+            <!--
+                        <LinearLayout
+                            android:id="@+id/LinearLayout3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp" >
 
-            <LinearLayout
-                android:id="@+id/LinearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" >
+                            <TextView
+                                android:id="@+id/textViewIPAddr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:text="IP Address : " />
 
-                <TextView
-                    android:id="@+id/textViewIPAddr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="IP Address : " />
+                            <EditText
+                                android:id="@+id/editTextIPAddr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:layout_weight="1"
+                                android:inputType="number"
+                                android:digits="1234567890."
+                                android:focusable="true"
+                                android:focusableInTouchMode="true" />
+                        </LinearLayout>
 
-                <EditText
-                    android:id="@+id/editTextIPAddr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:digits="1234567890."
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
-            </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/checkBoxAsyncMode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:layout_marginTop="5dp"
-                android:text="Async Mode" />
+                        <CheckBox
+                            android:id="@+id/checkBoxAsyncMode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:layout_marginTop="5dp"
+                            android:text="Async Mode" />
+                        -->
         </LinearLayout>
 
         <Button
@@ -136,7 +138,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/LinearLayout1"
             android:layout_marginTop="5dp"
-            android:text="Printer Open" />
+            android:text="ir a imprimir" />
 
         <ProgressBar
             android:id="@+id/progressBar1"
