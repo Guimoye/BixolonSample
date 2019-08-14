@@ -117,7 +117,7 @@ public class PrinterConnectActivity extends AppCompatActivity implements  Adapte
             public void run()
             {
                 //listView.setEnabled(false);
-                if(MainActivity.getPrinterInstance().printerOpen(portType, logicalName, address, false))
+                if(MainActivity.getPrinterInstance().printerOpen(portType, logicalName, address, true))
                 {
                     finish();
                 }

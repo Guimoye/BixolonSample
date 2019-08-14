@@ -1230,11 +1230,12 @@ public class BixolonPrinter implements ErrorListener, OutputCompleteListener, St
 
     @Override
     public void outputCompleteOccurred(OutputCompleteEvent outputCompleteEvent) {
+        Log.e("completando",outputCompleteEvent.getOutputID()+"");
         Fragment fm = MainActivity.getVisibleFragment();
         if(fm != null) {
             if(fm instanceof TextFragment)
             {
-                ((TextFragment) fm).setDeviceLog("outputComplete : " + outputCompleteEvent.getOutputID());
+                ((TextFragment) fm).setDeviceLog("outputCompleteeee : " + outputCompleteEvent.getOutputID());
             }
         }
     }
